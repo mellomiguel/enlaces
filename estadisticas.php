@@ -43,6 +43,8 @@
 
 	$mysqli = new mysqli('mysql.hostinger.es' , 'u226935810_mello', 'miguel', 'u226935810_visit' , 3306);
 	//$mysqli = new mysqli('localhost' , 'root', '', 'visits');
+	//localhost
+	
 
 	$query1 = "SELECT destino, COUNT(*) AS visits, (COUNT(*)*100)/(SELECT COUNT(*) FROM recuento) AS pocentaje FROM recuento GROUP BY origen,destino";
 
