@@ -29,48 +29,32 @@
         <div class="container" style="text-align:center">
           <h1>ESTADISTICAS</h1>
        	</div>
+       	</div>
 
-       		<TABLE>
-       		<tr><th>pagina</th><th>visitas</th><th>percent</th></tr>
-
-
-
-
-
-
+       		<table class="table">
+       		<tr>
+       		<th>Pagina</th>
+       		<th>Visitas</th>
+       		<th>Porcentaje</th>
+       		</tr>
 
 
 <?php
 
-
-if($_REQUEST){
-
 	$mysqli = new mysqli('mysql.hostinger.es' , 'u226935810_mello', 'miguel', 'u226935810_visit' , 3306);
+	//$mysqli = new mysqli('localhost' , 'root', '', 'visits');
 
-
-	if(!$mysqli || $msqli->connect_errno) {
-		die ("<h3>Error Conecting to MysQl</h3>");
-	}
-
- 
-	$query1 = "SELECT destino, COUNT(*) AS visits, (COUNT(*)*100)/(SELECT COUNT(*) FROM recuento) AS pocentaje FROM recuento GROUP BY destino ";
+	$query1 = "SELECT destino, COUNT(*) AS visits, (COUNT(*)*100)/(SELECT COUNT(*) FROM recuento) AS pocentaje FROM recuento GROUP BY origen,destino";
 
 	$numvisites = $mysqli->query($query1); 
 
-
-	
-
-
-	while(($row = mysqli_fetch_array($numvisites)) != NULL){
-		
-		echo "<tr><td>".$numvisites['destino']."<td></td>".$numvisites['visits']."</td><td>".$numvisites['porcentaje']."</td></tr>";
+	while($row = $numvisites->fetch_array(MYSQLI_BOTH)){
+		echo "<tr><td>".$row["destino"]."</td><td>".$row["visits"]."</td><td>".$row["pocentaje"]."</td></tr>";
 		}
 
-
-}
 ?>
-		</TABLE>
-      	</div>
+		</table>
+      	
 </div>
 
 </body>
